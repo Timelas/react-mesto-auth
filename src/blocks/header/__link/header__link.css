@@ -1,9 +1,12 @@
 .header__link {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     display: block;
+    font-style: normal;
+    font-weight: normal;
     font-size: 18px;
-    font-weight: 400;
-    color: white;
+    line-height: 22px;
     text-decoration: none;
+    color: #FFF;
 }
 
 .header__link:hover {

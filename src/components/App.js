@@ -16,8 +16,8 @@ import Login from './Login';
 import Register from './Register';
 import InfoTooltip from "./InfoTooltip";
 import * as auth from "../utils/auth";
-import registrationAccept from "../images/AcceptRegistration.svg";
-import registrationReject from "../images/RejectRegistration.svg";
+import accept from "../images/Accept.svg";
+import reject from "../images/Reject.svg";
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [isToooltipOpen, setIsTooltipOpen] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [message, setMessage] = React.useState({ imgPath: "", text: "" });
+  const [message, setMessage] = React.useState({ pathImage: "", text: "" });
   const [email, setEmail] = React.useState("");
 
   React.useEffect(()  => {
@@ -143,8 +143,8 @@ function handleUpdateUser({name, about}) {
     })
   }
 
-  function handleAddPlaceSubmit({name,link}) {
-    api.addNewCard(name,link)
+  function handleAddPlaceSubmit({name, link}) {
+    api.addNewCard(name, link)
 
     .then((data) => {
         setCards([data, ...cards])
@@ -170,7 +170,7 @@ function handleUpdateUser({name, about}) {
     auth.register(email, password)
       .then((res) => {
           handleTooltipInfo({
-            imgPath: registrationAccept,
+            pathImage: accept,
             text: "Вы успешно зарегестрировались!",
           });
           handleToolltipInfoOpen();
@@ -178,7 +178,7 @@ function handleUpdateUser({name, about}) {
       })
       .catch((err) => {
         handleTooltipInfo({
-          imgPath: registrationReject,
+          pathImage: reject,
           text: "Что - то пошло не так! Попробуйте еще раз.",
         });
         handleToolltipInfoOpen();
@@ -195,7 +195,7 @@ function handleUpdateUser({name, about}) {
         setLoggedIn(true);
         setEmail(email)
         handleTooltipInfo({
-          imgPath: registrationAccept,
+          pathImage: accept,
           text: "Вы успешно авторизированы!",
         });
         history.push("/");
@@ -203,7 +203,7 @@ function handleUpdateUser({name, about}) {
       })
       .catch((err) => {
         handleTooltipInfo({
-          imgPath: registrationReject,
+          pathImage: reject,
           text: "Что - то пошло не так! Попробуйте еще раз.",
         });
         handleToolltipInfoOpen();
@@ -212,17 +212,17 @@ function handleUpdateUser({name, about}) {
       });
   }
 
-  function handleTooltipInfo({imgPath, text}) {
-    setMessage({imgPath, text});
+  function handleTooltipInfo({pathImage, text}) {
+    setMessage({pathImage, text});
   }
 
   return (
   <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-      <Header 
-        handleSignOut={handleSignOut}
-        loggedIn={loggedIn}
-        email={email}/> 
+        <Header 
+          handleSignOut={handleSignOut}
+          loggedIn={loggedIn}
+          email={email} /> 
       <Switch>
         <Route path="/sign-in">
           <Login authorization={authorization} />
