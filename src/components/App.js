@@ -87,6 +87,7 @@ React.useEffect(() => {
       setIsEditAvatarPopupOpen(false);
       setIsAddPlacePopupOpen(false);
       setSelectedCards({isOpen: false});
+      setIsTooltipOpen(false);
   }
 
   function handleCardLike(card) {
@@ -102,8 +103,7 @@ React.useEffect(() => {
   function handleCardDelete(card) {
     api.deleteCard(card._id)
     .then(() => {
-        const newCards = cards.filter((elem) => elem !== card);
-        setCards(newCards)
+        setCards((state) => state.filter((c) => c._id !== card._id));
     })
     .catch((err) => {
       console.log(err)});
